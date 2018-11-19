@@ -1,4 +1,4 @@
-package ${packageName}.${viewModlelPackage};
+package ${packageName}.${viewModelPackage};
 
 import android.app.Application;
 

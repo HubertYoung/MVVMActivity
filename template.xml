@@ -38,6 +38,7 @@
         default="/.*"
         visibility="isInstantApp!false"
         help="The route to use in the Instant App route for this activity"/>
+
     <parameter
         id="activityName"
         name="MVVM Name"
@@ -45,14 +46,34 @@
         constraints="nonempty"
         default="MVVM"
         help="The name of the MVVM class to create"/>
+
     <parameter
         id="activityClass"
         name="MVVMActivity Name"
         type="string"
         constraints="class|unique|nonempty"
-        suggest="activity.${activityName}Activity"
+        suggest="${activityName}Activity"
         default="MainActivity"
         help="The name of the activity class to create"/>
+
+    <parameter
+        id="activityLayout"
+        name="Activity Layout Name"
+        type="string"
+        constraints="layout|unique|nonempty"
+        suggest="${classToResource(activityClass)}_activity"
+        default="main_activity"
+        visibility="generateLayout"
+        help="The name of the layout to create for the activity" />
+
+    <parameter
+        id="activityPackage"
+        name="Fragment package path"
+        type="string"
+        constraints="package"
+        suggest="activity.${classToResource(activityClass)?replace('_', '')}"
+        default="activity"
+        help="The package path for the activity" />
 
     <parameter
         id="generateLayout"
@@ -61,15 +82,6 @@
         default="true"
         help="If true, a layout file will be generated"/>
 
-    <parameter
-        id="layoutName"
-        name="Layout Name"
-        type="string"
-        constraints="layout|unique|nonempty"
-        suggest="${activityToLayout(activityName)}"
-        default="activity_main"
-        visibility="generateLayout"
-        help="The name of the layout to create for the activity"/>
 
     <parameter
         id="generateMVVM"
@@ -79,17 +91,40 @@
         help="If true, a mvvm file will be generated"/>
 
     <parameter
-        id="viewModellName"
-        name="MVVM Model"
+        id="viewModelClass"
+        name="ViewModel Name"
         type="string"
-        suggest="vm.${activityName?replace('_', '')}ViewModel"
-        help="The name of the model to create for the viewModellName"/>
+        constraints="class|unique|nonempty"
+        suggest="${underscoreToCamelCase(classToResource(activityClass))}ViewModel"
+        default="viewModel"
+        help="The name of the view model class to create" />
+
     <parameter
-        id="repositoryName"
-        name="Repository"
+        id="viewModelPackage"
+        name="viewModel package path"
         type="string"
-        suggest="source.${activityName}Repository"
-        help="The name of the presenter to create for the repositoryName"/>
+        constraints="package"
+        suggest="vm.${classToResource(viewModelClass)?replace('_', '')}"
+        default="vm"
+        help="The package path for the view model" />
+
+    <parameter
+        id="repositoryClass"
+        name="Repository Name"
+        type="string"
+        constraints="class|unique|nonempty"
+        suggest="${underscoreToCamelCase(classToResource(activityClass))}Repository"
+        default="MainViewModel"
+        help="The name of the repository class to create" />
+
+    <parameter
+        id="repositoryPackage"
+        name="repository package path"
+        type="string"
+        constraints="package"
+        suggest="source.${classToResource(repositoryClass)?replace('_', '')}"
+        default="source"
+        help="The package path for the repository" />
 
     <parameter
         id="isLauncher"

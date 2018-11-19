@@ -1,10 +1,6 @@
-package ${packageName};
+package ${packageName}.${activityPackage};
 
-import ${superClassFqcn};
-import android.os.Bundle;
-<#if includeCppSupport!false>
-import android.widget.TextView;
-</#if>
+import com.hubertyoung.common.base.AbsLifecycleActivity;
 
 /**
 * <br>
@@ -13,7 +9,7 @@ import android.widget.TextView;
 * @author:HubertYoung
 * @date:${date} ${time}
 * @since:V${version}
-* @desc:${packageName}
+* @desc:${packageName}.${activityPackage}
 */
 
 <#if generateMVVM>
@@ -26,7 +22,7 @@ public class ${activityClass} extends AbsLifecycleActivity{
 
  	@Override
     protected int getLayoutId() {
-        return R.layout.${layoutName};
+        return R.layout.${activityLayout};
     }
 
     @Override

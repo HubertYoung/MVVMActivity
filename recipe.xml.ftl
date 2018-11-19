@@ -4,36 +4,22 @@
     <#include "../common/recipe_manifest.xml.ftl" />
     <@kt.addAllKotlinDependencies />
 
- <instantiate from="root/res/layout/activity_mvvm.xml.ftl"
-                   to="${escapeXmlAttribute(resOut)}/layout/${escapeXmlAttribute(activityLayout)}.xml" />
+        <instantiate from="root/res/layout/activity_mvvm.xml.ftl"
+                     to="${escapeXmlAttribute(resOut)}/layout/${escapeXmlAttribute(activityLayout)}.xml" />
+        <open file="${escapeXmlAttribute(resOut)}/layout/${activityLayout}.xml" />
 
-<#if generateMVVM>
+        <instantiate from="root/src/app_package/MVVMActivity.${ktOrJavaExt}.ftl"
+                     to="${escapeXmlAttribute(srcOut)}/${activityPackage?replace('.', '/')}/${activityClass}.${ktOrJavaExt}" />
 
-    <instantiate from="root/src/app_package/IContract.java.ftl"
-                   to="${escapeXmlAttribute(srcOut)}/${contractName}.java" />
-    <open file="${escapeXmlAttribute(srcOut)}/${contractName}.java" />
+        <open file="${escapeXmlAttribute(srcOut)}/${activityPackage?replace('.', '/')}/${activityClass}.${ktOrJavaExt}" />
 
-     <instantiate from="root/src/app_package/Model.java.ftl"
-                   to="${escapeXmlAttribute(srcOut)}/${viewModlelName}.java" />
-    <open file="${escapeXmlAttribute(srcOut)}/${viewModlelName}.java" />
+        <instantiate from="root/src/app_package/ViewModel.${ktOrJavaExt}.ftl"
+                     to="${escapeXmlAttribute(srcOut)}/${viewModelPackage?replace('.', '/')}/${viewModelClass}.${ktOrJavaExt}" />
+        <open file="${escapeXmlAttribute(srcOut)}/${viewModelPackage?replace('.', '/')}/${viewModelClass}.${ktOrJavaExt}" />
 
-     <instantiate from="root/src/app_package/Presenter.java.ftl"
-                   to="${escapeXmlAttribute(srcOut)}/${presenterName}.java" />
-    <open file="${escapeXmlAttribute(srcOut)}/${presenterName}.java" />
-    
-</#if>
+        <instantiate from="root/src/app_package/Repository.${ktOrJavaExt}.ftl"
+                     to="${escapeXmlAttribute(srcOut)}/${repositoryPackage?replace('.', '/')}/${repositoryClass}.${ktOrJavaExt}" />
+        <open file="${escapeXmlAttribute(srcOut)}/${repositoryPackage?replace('.', '/')}/${repositoryClass}.${ktOrJavaExt}" />
 
-
-<#if generateKotlin>
-  
-    <instantiate from="root/src/app_package/MVVMActivity.kt.ftl"
-                   to="${escapeXmlAttribute(srcOut)}/${activityClass}.kt" />
-    <open file="${escapeXmlAttribute(srcOut)}/${activityClass}.kt" />
-<#else>
-    <instantiate from="root/src/app_package/MVVMActivity.java.ftl"
-                   to="${escapeXmlAttribute(srcOut)}/${activityClass}.java" />
-    <open file="${escapeXmlAttribute(srcOut)}/${activityClass}.java" />
-
-</#if>
 
 </recipe>

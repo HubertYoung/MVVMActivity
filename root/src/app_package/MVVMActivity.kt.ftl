@@ -1,16 +1,11 @@
-package ${escapeKotlinIdentifiers(packageName)}
+package ${escapeKotlinIdentifiers(packageName)}.${escapeKotlinIdentifiers(activityPackage)}
 
-import ${superClassFqcn}
-import android.os.Bundle
-<#if includeCppSupport!false>
-import kotlinx.android.synthetic.main.${layoutName}.*
-import com.hubertyoung.common.base.AbsLifecycleActivity
-
+import ${escapeKotlinIdentifiers(packageName)}.R
 
 <#if generateMVVM>
-class ${activityClass} : AbsLifecycleActivity<*>() {
+class ${activityClass} : AbsLifecycleActivity< ${viewModlelName} >() {
 <#else>
-class ${activityClass} : ${superClass}() {
+class ${activityClass} : AbsLifecycleActivity< * >() {
 </#if>
     override fun getLayoutId(): Int = R.layout.${activityLayout}
 
@@ -21,8 +16,5 @@ class ${activityClass} : ${superClass}() {
     override fun initToolBar() {
 
     }
-<#include "../../../../common/jni_code_usage.kt.ftl">
-    }
-<#include "../../../../common/jni_code_snippet.kt.ftl">
 
 }

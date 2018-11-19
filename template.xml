@@ -82,6 +82,15 @@
         default="true"
         help="If true, a layout file will be generated"/>
 
+    <parameter
+        id="layoutName"
+        name="Layout Name"
+        type="string"
+        constraints="layout|unique|nonempty"
+        suggest="${activityToLayout(activityClass)}"
+        default="activity_main"
+        visibility="generateLayout"
+        help="The name of the layout to create for the activity" />
 
     <parameter
         id="generateMVVM"

@@ -4,6 +4,8 @@ import android.app.Application;
 import com.hubertyoung.common.base.AbsViewModel;
 import com.hubertyoung.common.baserx.RxSubscriber;
 import androidx.annotation.NonNull;
+import ${packageName}.source.${shortName}Repository;
+
 /**
 * desc:
 * @author:HubertYoung
@@ -11,7 +13,7 @@ import androidx.annotation.NonNull;
 * @since:
 * @see ${packageName}.activity.${activityClass}
 */
-public class ${viewmodelName} extends AbsViewModel< ABCRepository >  {
+public class ${viewmodelName} extends AbsViewModel< ${repositoryName} >  {
 
     public ${viewmodelName} ( @NonNull Application application ) {
         super( application );
@@ -31,8 +33,8 @@ public class ${viewmodelName} extends AbsViewModel< ABCRepository >  {
                 }
 
                 @Override
-                public void onSuccess( * obj ) {
-                //sendData( DynamicConstants.EVENT_KEY_DYNAMIC_ALL_CHANNEL, user );
+                public void onSuccess( Object o ) {
+                //sendData( DynamicConstants.EVENT_KEY_DYNAMIC_ALL_CHANNEL, o );
                 }
 
                 @Override

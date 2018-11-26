@@ -17,15 +17,15 @@ import io.reactivex.Flowable;
 * @see ${packageName}.vm.${viewmodelName}
 */
 
-public class ${repositoryName} extends AbsRepository {
+class ${repositoryName} : AbsRepository {
 
-    public Flowable< Object > requestHttp() {
+    fun requestHttp() : Flowable< Any >{
         return Api.getDefault( HostType.MY_RESULT )//
             .getRetrofitClient()//
             .setBaseUrl( EnvironmentSwitcher.getObjectEnvironment( CommonApplication.getAppContext(), BuildConfig.DEBUG) )//
-            .builder( ApiObject.class )//
-            .requestHttp( )//
-            .compose( new DefaultTransformer() );
-    }
+            .builder( ApiObject::class.java )//
 
+            .requestHttp( )//
+            .compose( DefaultTransformer() );
+    }
 }

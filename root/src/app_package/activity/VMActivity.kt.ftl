@@ -1,37 +1,38 @@
-package ${escapeKotlinIdentifiers(packageName)}.activity;
-<#if generateViewModel>
-import ${packageName}.vm.${shortName}ViewModel
-import javax.inject.Inject
-</#if>  
+package ${packageName}.activity;
 
+import com.hubertyoung.common.base.AbsLifecycleActivity;
+
+import ${superClassFqcn};
+<#if generateViewModel>
+import ${packageName}.vm.${shortName}ViewModel;
+</#if>
 <#if applicationPackage??>
-import ${applicationPackage}.R
-import ${applicationPackage}.databinding.${activityClass}Binding
-import ${applicationPackage}.view.base.BaseActivity
+import ${applicationPackage}.R;
 </#if>
 
 /**
- * description: ${activityClass}
- <#if generateViewModel>
- * @see ${shortName}ViewModel
- </#if>
- *
- * @date ${.now?string("yyyy/MM/dd")}
- */
-
+* desc: ${activityClass}
+* @author:HubertYoung
+* @date: ${.now?string("yyyy/MM/dd HH:mm")}
+* @since:
+<#if generateViewModel>
+* @see ${shortName}ViewModel
+</#if>
+*/
+<#if generateViewModel>
+class ${activityClass} : AbsLifecycleActivity< ${shortName}ViewModel > {
+<#else>
+class ${activityClass} : AbsLifecycleActivity<*>{
 class ${activityClass} : BaseActivity<${activityClass}Binding>(){
-
-	<#if generateViewModel>
-	@Inject
-	lateinit var mViewModel : ${viewmodelName}
-	</#if>
+</#if>
 
 	override fun getLayoutId(): Int = R.layout.${layoutName}
 
-    override fun initView() {
-         <#if generateViewModel>
-        getComponent().inject(this)
-        mBinding.vm=mViewModel
-        </#if>
+    override fun loadData() {
+
+    }
+
+    override fun initToolBar() {
+
     }
 }
